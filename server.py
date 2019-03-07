@@ -1,9 +1,12 @@
 import os
-from bottle import route, run
+from bottle import route, run, response
 from horoscope import generate_prophecies
 
 @route("/api/forecasts")
 def forecasts():
+	response.headers['Access-Control-Allow-Origin'] = '*'
+	response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, OPTIONS'
+	response.headers['Content-Type'] = 'application/json'
 	return {"prophecies" : generate_prophecies(total_num = 6, num_sentences = 2), }	
 
 	
